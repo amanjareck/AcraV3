@@ -72,16 +72,17 @@
             document.write("<TR><TD>Total = </TD><TD ALIGN=RIGHT>$" + total + "</TD>");
             document.write("<TD>&nbsp;</TD></TR></TABLE><BR>");
             document.write("<button class=\"popup\" onclick=\"window.location.href=\'index.html\'\">Start Again</button>");
-            document.write("<button class=\"popup\" onclick=\"checkOut();" > Checkout < /button>");
-            document.write("</CENTER > < /BODY></HTML > ");
+            document.write("<button class=\"popup\" onclick=\"JavaScript:checkOut()\">Checkout</button>");
+            document.write("</CENTER></BODY></HTML>");
 
         };
 
-       function checkOut(){
-            document.write(" < HTML > < HEAD > < TITLE > Check Out < /TITLE><link rel=\"stylesheet\" href=\"css/style.css\ " /></head>");
+        function checkOut() {
+            document.body.innerHTML = "";
+            document.write("<HTML><HEAD><TITLE>Check Out</TITLE><link rel=\"stylesheet\" href=\"css/style.css\" /></head>");
             document.write("<BODY><CENTER>");
-            document.write("<h1>Check Out Coming Soon...</h1>");
-            document.write("<button class=\"popup\" onclick=\"window.location.href=\'index.html\'\">Start Again</button>");
+            document.write("<h1>Check Out Coming Soon...</h1 >");
+            document.write("<button class = \"popup\" onclick=\"window.location.href=\'index.html\'\">Start Again</button>");
             document.write("</CENTER></BODY></HTML>");
         }
 
