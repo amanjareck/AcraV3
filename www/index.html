@@ -4,55 +4,6 @@
     <title>AcraVentures</title>
     <link rel="stylesheet" href="css/style.css" />
 </head>
-<!--<SCRIPT LANGUAGE="JavaScript">
-    var numitem = 0;
-    var cart = new Object;
-    function additem(desc, price, itemcnt) {
-        this.desc = desc;
-        this.price = price;
-        this.itemcnt = itemcnt;
-        this.display = prtitem;
-        return this;
-    }
-    function delitem(itemcnt) {
-        delete cart[itemcnt];
-        viewcart();
-    }
-    function addcart(desc, price) {
-        cart[numitem] = new additem(desc, price, numitem);
-        numitem = numitem + 1;
-        alert(desc + " has been added to your shopping cart.  Thank you!");
-    }
-    function prtitem(doc) {
-        with(doc) {
-            write("<TR><TD>" + this.desc + "</TD>")
-            write("<TD ALIGN=RIGHT>$" + this.price + "</TD>")
-            write("<TD><A HREF='JavaScript:top.hidden.delitem(" + this.itemcnt + ")'>Remove Order</A></TD>")
-            write("</TR>")
-        }
-    }
-    function viewcart() {
-        var total = 0;
-        var i = 0;
-        with(top.main.document) {
-            write();
-            close();
-            write("<HTML><TITLE>Shopping Cart</TITLE>");
-            write("<BODY BGCOLOR=antiquewhite><CENTER>");
-            write("<H2>Thank you for your order</H2>");
-            write("<TABLE BORDER=1 CELLPADDING=3 CELLSPACING=1 WIDTH=500>");
-            for (i in cart) {
-                total = total + cart[i].price;
-                if (cart[i].itemcnt != null); {
-                    cart[i].display(top.main.document);
-                }
-            }
-            write("<TR><TD>Total = </TD><TD ALIGN=RIGHT>$" + total + "</TD>");
-            write("<TD>&nbsp;</TD></TR></TABLE><BR>");
-            write("</CENTER></BODY></HTML>");
-        }
-    }
-</SCRIPT>-->
 
 <body>
     <h1>Acra Ventures</h1>
@@ -65,25 +16,8 @@
         <br/>
     </nav>
 
-    <!-- <input type="button" value="Button 1" id="btn1" />
-    <input type="button" value="Button 2" id="btn2" />
-    <input type="button" value="Button 3" id="btn3" onclick="buttonClicked();" />
-    <script type="text/javascript">
-        function buttonClicked() {
-            var text = (this === window) ? 'window' : this.id;
-            alert(text);
-        }
-        var button1 = document.getElementById('btn1');
-        var button2 = document.getElementById('btn2');
-        button1.onclick = buttonClicked;
-        button2.onclick = function () {
-            buttonClicked();
-        };
-</script>-->
-
     <script>
         var div = document.getElementById('message');
-        div.addClass('hidden').hide();
         var numitem = 0;
         var cart = new Object;
 
@@ -93,48 +27,67 @@
             this.itemcnt = itemcnt;
             this.display = prtitem;
             return this;
-        }
+        };
 
         function addcart(desc, price) {
             cart[numitem] = new additem(desc, price, numitem);
             numitem = numitem + 1;
-            if (div.hasClass('hidden')) {
-                div.removeClass('hidden').fadeIn(3000);
-                div.addClass('hidden').fadeOut(3000);
-            }
+            var div = document.getElementById("message");
+            setTimeout(function () {
+                div.style.display = "block";
+            }, 100);
+            setTimeout(function () {
+                div.style.display = "none";
+            }, 1000);
+        }
 
+        function prtitem(doc) {
+            document.write("<TR><TD>" + this.desc + "</TD>")
+            document.write("<TD ALIGN=RIGHT>$" + this.price + "</TD>")
+            document.write("<TD><A HREF='JavaScript:delitem(" + this.itemcnt + ")'>Remove</A></TD>")
+            document.write("</TR>")
+        };
 
+        function delitem(itemcnt) {
+            delete cart[itemcnt];
+            viewcart();
+        };
 
-            function prtitem(doc) {
-                with(doc) {
-                    write("<TR><TD>" + this.desc + "</TD>")
-                    write("<TD ALIGN=RIGHT>$" + this.price + "</TD>")
-                    write("<TD><A HREF='JavaScript:top.hidden.delitem(" + this.itemcnt + ")'>Remove Order</A></TD>")
-                    write("</TR>")
+        function viewcart() {
+            var total = 0;
+            var i = 0;
+            // To refresh the Table
+            document.body.innerHTML = "";
+            // To Create a Table
+            document.write("<HTML><HEAD><TITLE>Shopping Cart</TITLE><link rel=\"stylesheet\" href=\"css/style.css\" /></head>");
+            document.write("<BODY><CENTER>");
+            document.write("<h1>Thank you for your order</h1>");
+            document.write("<TABLE CELLPADDING=3 CELLSPACING=1 >");
+            for (i in cart) {
+                total = total + cart[i].price;
+                if (cart[i].itemcnt != null) {
+                    cart[i].display();
                 }
             }
+            document.write("<TR><TD>Total = </TD><TD ALIGN=RIGHT>$" + total + "</TD>");
+            document.write("<TD>&nbsp;</TD></TR></TABLE><BR>");
+            document.write("<button class=\"popup\" onclick=\"window.location.href=\'index.html\'\">Start Again</button>");
+            document.write("<button class=\"popup\" onclick=\"checkOut();" > Checkout < /button>");
+            document.write("</CENTER > < /BODY></HTML > ");
 
-            function viewcart() {
-                var total = 0;
-                var i = 0;
-                with(top.main.document) {
-                    write();
-                    close();
-                    write("<HTML><TITLE>Shopping Cart</TITLE>");
-                    write("<BODY BGCOLOR=antiquewhite><CENTER>");
-                    write("<H2>Thank you for your order</H2>");
-                    write("<TABLE BORDER=1 CELLPADDING=3 CELLSPACING=1 WIDTH=500>");
-                    for (i in cart) {
-                        total = total + cart[i].price;
-                        if (cart[i].itemcnt != null); {
-                            cart[i].display(top.main.document);
-                        }
-                    }
-                    write("<TR><TD>Total = </TD><TD ALIGN=RIGHT>$" + total + "</TD>");
-                    write("<TD>&nbsp;</TD></TR></TABLE><BR>");
-                    write("</CENTER></BODY></HTML>");
-                }
-            }
+        };
+
+       function checkOut(){
+            document.write(" < HTML > < HEAD > < TITLE > Check Out < /TITLE><link rel=\"stylesheet\" href=\"css/style.css\ " /></head>");
+            document.write("<BODY><CENTER>");
+            document.write("<h1>Check Out Coming Soon...</h1>");
+            document.write("<button class=\"popup\" onclick=\"window.location.href=\'index.html\'\">Start Again</button>");
+            document.write("</CENTER></BODY></HTML>");
+        }
+
+        function reload1() {
+            document.reload();
+        }
     </script>
     <div id="message" style="display:none;">
         Added to Cart
@@ -155,53 +108,53 @@
     <div id="productlist" style="display:none;">
         <div class="product">
             <img src="http://catalog.wlimg.com/1/1593702/full-images/twinkling-glass-lamps-1242746.jpg" height="150" width="120" />
-            <p>Twinkling Glass Lamps</p>
-            <input type="button" onclick="addcart('Twinkling Glass Lamps',5.95);" Value="Add to Cart" />
+            <h3>Twinkling Glass Lamps</h3>
+            <input type="button" onclick="addcart('Twinkling Glass Lamps',5.95);" Value="Add to Cart" class="AddCart" />
         </div>
         <div class="product">
             <img src="http://catalog.wlimg.com/1/1593702/other-images/118137.jpg" height="150" width="120" />
-            <p>Candle Votives</p>
-            <input type="button" onclick="addcart('Candle Votives',3.25);" Value="Add to Cart" />
+            <h3>Candle Votives</h3>
+            <input type="button" onclick="addcart('Candle Votives',3.25);" Value="Add to Cart" class="AddCart" />
         </div>
         <div class="product">
             <img src="http://catalog.wlimg.com/1/1593702/other-images/118142.jpg" height="150" width="120" />
-            <p>Hurricane Lanterns</p>
-            <input type="button" onclick="addcart('Hurricane Lanterns',7.05);" Value="Add to Cart" />
+            <h3>Hurricane Lanterns</h3>
+            <input type="button" onclick="addcart('Hurricane Lanterns',7.05);" Value="Add to Cart" class="AddCart" />
         </div>
         <div class="product">
             <img src="http://catalog.wlimg.com/1/1593702/other-images/133807.jpg" height="150" width="120" />
-            <p>Tealight Candle Holders</p>
-            <input type="button" onclick="addcart('Tealight Candle Holders',2.25);" Value="Add to Cart" />
+            <h3>Tealight Candle Holders</h3>
+            <input type="button" onclick="addcart('Tealight Candle Holders',2.25);" Value="Add to Cart" class="AddCart" />
         </div>
         <div class="product">
             <img src="http://catalog.wlimg.com/1/1593702/other-images/118167.jpg" height="150" width="120" />
-            <p>Wrought Iron Candle Stand</p>
-            <input type="button" onclick="addcart('Wrought Iron Candle Stand',3.65);" Value="Add to Cart" />
+            <h3>Wrought Iron Candle Stand</h3>
+            <input type="button" onclick="addcart('Wrought Iron Candle Stand',3.65);" Value="Add to Cart" class="AddCart" />
         </div>
         <div class="product">
             <img src="http://catalog.wlimg.com/1/1593702/full-images/hanging-lamp-1242749.jpg" height="150" width="120" />
-            <p>Hanging Lamp</p>
-            <input type="button" onclick="addcart('Hanging Lamp',4.15);" Value="Add to Cart" />
+            <h3>Hanging Lamp</h3>
+            <input type="button" onclick="addcart('Hanging Lamp',4.15);" Value="Add to Cart" class="AddCart" />
         </div>
         <div class="product">
             <img src="http://catalog.wlimg.com/1/1593702/full-images/promotional-mugs-1242753.jpg" height="150" width="120" />
-            <p>Promotional Mugs</p>
-            <input type="button" onclick="addcart('Promotional Mugs',1.25);" Value="Add to Cart" />
+            <h3>Promotional Mugs</h3>
+            <input type="button" onclick="addcart('Promotional Mugs',1.25);" Value="Add to Cart" class="AddCart" />
         </div>
         <div class="product">
             <img src="http://catalog.wlimg.com/1/1593702/full-images/salt-pepper-holder-1242756.jpg" height="150" width="120" />
-            <p>Salt and Pepper Holder</p>
-            <input type="button" onclick="addcart('Salt and Pepper Holder',3.35);" Value="Add to Cart" />
+            <h3>Salt and Pepper Holder</h3>
+            <input type="button" onclick="addcart('Salt and Pepper Holder',3.35);" Value="Add to Cart" class="AddCart" />
         </div>
         <div class="product">
             <img src="http://catalog.wlimg.com/1/1593702/other-images/133815.jpg" height="150" width="120" />
-            <p>Aromatherapy Oil Burner</p>
-            <input type="button" onclick="addcart('Aromatherapy Oil Burner',5.15);" Value="Add to Cart" />
+            <h3>Aromatherapy Oil Burner</h3>
+            <input type="button" onclick="addcart('Aromatherapy Oil Burner',5.15);" Value="Add to Cart" class="AddCart" />
         </div>
         <div class="product">
             <img src="http://catalog.wlimg.com/1/1593702/full-images/iron-multipurpose-holder-1269357.jpg" height="150" width="120" />
-            <p>Iron Multipurpose Holder</p>
-            <input type="button" onclick="addcart('Iron Multipurpose Holder',3.75);" Value="Add to Cart" />
+            <h3>Iron Multipurpose Holder</h3>
+            <input type="button" onclick="addcart('Iron Multipurpose Holder',3.75);" Value="Add to Cart" class="AddCart" />
         </div>
     </div>
 
@@ -210,7 +163,7 @@
         <!-- Popup Div Starts Here -->
         <div id="popupContact">
             <!-- Contact Us Form -->
-            <form action="#" id="form" method="post" name="form">
+            <form action="index.html" id="form" name="form">
                 <img id="close" src="images/3.png" onclick="div_hide()">
                 <h2>Contact Us</h2>
                 <hr>

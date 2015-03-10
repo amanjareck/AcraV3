@@ -4,7 +4,7 @@ function check_empty() {
         alert("Fill All Fields !");
     } else {
         document.getElementById('form').submit();
-        alert("Form Submitted Successfully...");
+        alert("Thanku For Contacting! We Will get back to you ASAP!");
     }
 }
 //Function To Display Popup
